@@ -2,4 +2,7 @@
 @plugin "daisyui" {
 themes: all;
 }
-
+@theme {
+  --font-oswald: var(--font-oswald);
+  --font-inter: var(--font-inter);
+}

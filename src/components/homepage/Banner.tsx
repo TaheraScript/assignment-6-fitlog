@@ -10,7 +10,7 @@ const Banner = () => {
   TRAIN WITH INTENT. LOG <br/>
   EVERY SET.
 </h1>
-<p className='font-normal text-[16px] font-inter'>
+<p className='font-normal text-[16px] font-inter text-[#9CA3AF]'>
   FitLog is a dark, no-nonsense gym companion: pick a lift, lock it <br />
   into today&apos;s plan, and watch the week&apos;s work add up.
 </p>

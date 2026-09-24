@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const Navbar = () => {
     return (
@@ -12,34 +13,18 @@ const Navbar = () => {
       <ul
         tabIndex={-1}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-        <li><a>picture</a></li>
-        <li>
-          <a>Parent</a>
-          <ul className="p-2">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
-          </ul>
-        </li>
+        <li><Link href='/workouts'>Workouts</Link></li>
         <li><a>movie</a></li>
       </ul>
     </div>
    <div className="flex items-center">
     <Image src='/logo.png' width={25} height={20} alt="Dumbbell logo icon"></Image>
-     <a className="btn btn-ghost font-bold text-[18px] text-white">FITLOG</a>
+     <a className="btn btn-ghost font-bold text-[18px] text-white font-oswald">FITLOG</a>
    </div>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
-      <li><a>Item 1</a></li>
-      <li>
-        <details>
-          <summary>Parent</summary>
-          <ul className="p-2 bg-base-100 w-40 z-1">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
-          </ul>
-        </details>
-      </li>
+      <li><Link href='/workouts'>Workouts</Link></li>
       <li><a>Item 3</a></li>
     </ul>
   </div>
