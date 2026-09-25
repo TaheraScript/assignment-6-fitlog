@@ -3,11 +3,14 @@ import { IWorkout } from "../type/Workouts-type";
 import { PiFireSimpleFill } from "react-icons/pi";
 import { FaRegClock } from "react-icons/fa";
 import { MdOutlineStarBorderPurple500 } from "react-icons/md";
+import Link from "next/link";
+
 interface IDataPropType {
   data: IWorkout;
 }
 const WorkoutsCard = ({ data }: IDataPropType) => {
   return (
+    <Link href={`/workouts/${data.id}`}>
     <div className="rounded-xl overflow-hidden bg-[#15171d]">
       <div>
         <Image
@@ -18,12 +21,12 @@ const WorkoutsCard = ({ data }: IDataPropType) => {
           className="object-cover w-full h-full"
         />
       </div>
-      <div className="p-5">
-        <div className="flex gap-4">
+      <div className="p-5 space-y-2">
+        <div className="flex gap-2">
           {data.muscleGroups.map((muscle, index) => (
             <div
               key={index}
-              className="badge font-inter font-bold text-[11px] rounded-4xl bg-[#ccff00] text-black uppercase"
+              className="badge font-inter font-bold text-[11px] rounded-4xl bg-[#ccff00] text-black "
             >
               {muscle}
             </div>
@@ -53,6 +56,7 @@ const WorkoutsCard = ({ data }: IDataPropType) => {
 </div>
       </div>
     </div>
+    </Link>
   );
 };
 

@@ -2,8 +2,8 @@ import Image from 'next/image';
 
 const Banner = () => {
     return (
-        <section className='py-20 space-y-3'>
-           <div className='grid grid-cols-[1fr_auto] gap-8 items-center container mx-auto bg-[#15171d] px-14 py-20'>
+        <section className='py-20 space-y-3 '>
+           <div className='grid grid-cols-[1fr_auto] gap-8 items-center container mx-auto bg-[#15171d] px-14 py-20 rounded-2xl overflow-hidden'>
             <div className='space-y-4'>
                 <p className='font-bold text-[11px] font-inter text-[#ccff00]'>WORKOUT LIBRARY</p>
                 <h1 className='font-oswald text-[60px] font-extrabold text-white whitespace-nowrap leading-none'>

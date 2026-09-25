@@ -1,7 +1,10 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+  const pathname = usePathname();
     return (
        <div className=" bg-[#15171d] shadow-sm">
          <div className=" navbar container mx-auto" >
@@ -13,8 +16,9 @@ const Navbar = () => {
       <ul
         tabIndex={-1}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-        <li><Link href='/workouts'>Workouts</Link></li>
-        <li><a>movie</a></li>
+        <li><Link className={pathname === '/workouts' ? 'text-[#ccff00]' : ''} href='/workouts'>Workouts</Link></li>
+        
+        <li><Link className={pathname === '/my-plan' ? 'text-[#ccff00]' : ''} href='/my-plan'>My Plan</Link></li>
       </ul>
     </div>
    <div className="flex items-center">
@@ -24,8 +28,8 @@ const Navbar = () => {
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
-      <li><Link href='/workouts'>Workouts</Link></li>
-      <li><a>Item 3</a></li>
+      <li><Link className={pathname === '/workouts' ? 'text-[#ccff00]' : ''} href='/workouts'>Workouts</Link></li>
+      <li><Link className={pathname === '/my-plan' ? 'text-[#ccff00]' : ''} href='/my-plan'>My Plan</Link></li>
     </ul>
   </div>
   <div className="navbar-end">
