@@ -25,8 +25,8 @@ transition: Bounce,
 });
     }
     return (
-        <Link href="/my-plan"
-       // onClick={()=>handleWorkouts()} 
+        <Link href="/my-plan? tab=today"
+        onClick={()=>handleWorkouts()} 
          className="flex-1 bg-[#ccff00] text-[#0F1115] font-semibold p-2 rounded-lg hover:bg-lime-300 transition font-inter text-[14px] flex justify-center items-center gap-2">
                 <LuCalendarPlus2 />Add to today&apos;s plan
               </Link>

@@ -4,6 +4,7 @@ import { WorkoutsContext } from '@/context/WorkoutsProvider';
 import { useContext } from 'react';
 import { Bounce, toast } from 'react-toastify';
 import { FaRegBookmark } from 'react-icons/fa';
+import Link from 'next/link';
 
 const SaveButton = ({data} :{data:IWorkout}) => {
     const WorkoutsProvider = useContext(WorkoutsContext)
@@ -24,9 +25,12 @@ transition: Bounce,
 });
     }
     return (
-       <button className="flex-1 border border-[#374151] text-[#E5E7EB]  font-medium text-[14px] font-inter p-2 rounded-lg hover:bg-gray-800 transition flex justify-center items-center gap-2" onClick={() =>handleWorkouts()}>
+       <Link href="/my-plan ? tab=saved"
+       onClick={() =>handleWorkouts()}
+        className="flex-1 border border-[#374151] text-[#E5E7EB]  font-medium text-[14px] font-inter p-2 rounded-lg hover:bg-gray-800 transition flex justify-center items-center gap-2" >
                <FaRegBookmark /> Save for later
-              </button>
+              </Link>
+              
     );
 };
 
