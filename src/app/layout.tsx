@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Inter,Oswald ,Geist, Geist_Mono } from "next/font/google";
+import { Inter, Oswald, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import Navbar from "@/components/shared/Navbar";
 import WorkoutsProvider from "@/context/WorkoutsProvider";
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,16 +15,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 const oswald = Oswald({
-  subsets: ['latin'],
-  
-  variable: '--font-oswald', // CSS variable approach — recommended for Tailwind
+  subsets: ["latin"],
+
+  variable: "--font-oswald",
 });
 
-
 const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-inter',
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -43,11 +41,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <WorkoutsProvider>
           <Navbar></Navbar>
-        {children}
-        <ToastContainer />
+          {children}
+          <ToastContainer />
         </WorkoutsProvider>
-
-        </body>
+      </body>
     </html>
   );
 }

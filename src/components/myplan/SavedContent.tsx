@@ -1,14 +1,13 @@
-import Image from "next/image"; // added: for the small workout thumbnail
+import Image from "next/image"; 
 import Link from "next/link";
 import { IWorkout } from "@/components/type/Workouts-type";
-import { FaRegClock } from "react-icons/fa"; // added: duration icon
-import { PiFireSimpleFill } from "react-icons/pi"; // added: calories icon
-import { MdOutlineStarBorderPurple500 } from "react-icons/md"; // added: rating icon
-import { IoClose } from "react-icons/io5"; // added: remove (X) icon
-
+import { FaRegClock } from "react-icons/fa"; 
+import { PiFireSimpleFill } from "react-icons/pi"; 
+import { MdOutlineStarBorderPurple500 } from "react-icons/md"; 
+import { IoClose } from "react-icons/io5"; 
 interface ISavedContentProps {
   data: IWorkout[];
-  onRemove?: (id: number) => void; // added: optional callback to remove a saved item
+  onRemove?: (id: number) => void; 
 }
 
 const SavedContent = ({ data, onRemove }: ISavedContentProps) => {
@@ -29,7 +28,6 @@ const SavedContent = ({ data, onRemove }: ISavedContentProps) => {
     );
   }
 
-  // changed: replaced the grid-of-cards layout with a vertical list of rows matching the screenshot
   return (
     <div className="flex flex-col gap-4">
       {data.map((item) => (
@@ -37,7 +35,7 @@ const SavedContent = ({ data, onRemove }: ISavedContentProps) => {
           key={item.id}
           className="flex items-center justify-between bg-[#151921] rounded-xl p-3"
         >
-          {/* Left: thumbnail + info */}
+          
           <div className="flex items-center gap-4">
             <div className="relative w-16 h-16 rounded-lg overflow-hidden shrink-0">
               <Image src={item.image} alt={item.name} fill className="object-cover" />
@@ -49,19 +47,19 @@ const SavedContent = ({ data, onRemove }: ISavedContentProps) => {
               <p className="text-[#8A92A0] text-[12px] font-inter">{item.equipment}</p>
               <div className="flex items-center gap-3 mt-1 text-[12px] text-[#8A92A0]">
                 <span className="flex items-center gap-1">
-                  <FaRegClock /> {item.duration} min
+                  <FaRegClock className="text-[#ccff00]"/> {item.duration} min
                 </span>
-                <span className="flex items-center gap-1 text-[#ccff00]">
-                  <PiFireSimpleFill /> {item.caloriesBurned} kcal
+                <span className="flex items-center gap-1 ">
+                  <PiFireSimpleFill className="text-[#ccff00]"/> {item.caloriesBurned} kcal
                 </span>
                 <span className="flex items-center gap-1">
-                  <MdOutlineStarBorderPurple500 /> {item.rating}
+                  <MdOutlineStarBorderPurple500 className="text-[#ccff00]"/> {item.rating}
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Right: actions — Saved tab shows "View Details" only, no "Mark as Done" */}
+         
           <div className="flex items-center gap-3">
             <Link
               href={`/workouts/${item.id}`}

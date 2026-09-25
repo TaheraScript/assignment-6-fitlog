@@ -27,9 +27,9 @@ const Workouts = async () => {
     <div className="container mx-auto">
       <div className="pb-8">
         <h2 className="font-oswald font-bold text-[30px]">THE LIBRARY</h2>
-      <p className="font-normal text-[14px]">
-        Twelve lifts covering every major muscle group.
-      </p>
+        <p className="font-normal text-[14px]">
+          Twelve lifts covering every major muscle group.
+        </p>
       </div>
       <div className="grid grid-cols-3 grid-rows-4 gap-4 container mx-auto">
         {workoutsData.length > 0 ? (

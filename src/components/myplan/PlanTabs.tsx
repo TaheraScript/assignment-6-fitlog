@@ -1,52 +1,56 @@
-'use client'
-import { useState } from 'react';
-import { IWorkout } from '@/components/type/Workouts-type';
-import TodaysPlanContent from './TodaysPlanContent';
-import SavedContent from './SavedContent';
+"use client";
+import { useState } from "react";
+import { IWorkout } from "@/components/type/Workouts-type";
+import TodaysPlanContent from "./TodaysPlanContent";
+import SavedContent from "./SavedContent";
 
-type TabType = 'today' | 'saved';
-type SortType = 'duration' | 'calories' | 'rating' | 'name';
+type TabType = "today" | "saved";
+type SortType = "duration" | "calories" | "rating" | "name";
 
 interface IPlanTabsProps {
   add: IWorkout[];
   save: IWorkout[];
-  setAdd: (data: IWorkout[]) => void; // added: needed to remove/mark-done items
-  setSave: (data: IWorkout[]) => void; // added: needed to remove saved items
+  setAdd: (data: IWorkout[]) => void;
+  setSave: (data: IWorkout[]) => void;
   activeTab: TabType;
   setActiveTab: (tab: TabType) => void;
 }
 
-const PlanTabs = ({ add, save, setAdd, setSave, activeTab, setActiveTab }: IPlanTabsProps) => {
-  const [sortBy, setSortBy] = useState<SortType>('duration');
+const PlanTabs = ({
+  add,
+  save,
+  setAdd,
+  setSave,
+  activeTab,
+  setActiveTab,
+}: IPlanTabsProps) => {
+  const [sortBy, setSortBy] = useState<SortType>("duration");
 
   const sortOptions: { key: SortType; label: string }[] = [
-    { key: 'duration', label: 'Duration' },
-    { key: 'calories', label: 'Calories' },
-    { key: 'rating', label: 'Rating' },
-    { key: 'name', label: 'Name' },
+    { key: "duration", label: "Duration" },
+    { key: "calories", label: "Calories" },
+    { key: "rating", label: "Rating" },
+    { key: "name", label: "Name" },
   ];
 
   const sortData = (data: IWorkout[]) => {
     return [...data].sort((a, b) => {
-      if (sortBy === 'name') return a.name.localeCompare(b.name);
-      if (sortBy === 'duration') return a.duration - b.duration;
-      if (sortBy === 'calories') return a.caloriesBurned - b.caloriesBurned;
-      if (sortBy === 'rating') return b.rating - a.rating;
+      if (sortBy === "name") return a.name.localeCompare(b.name);
+      if (sortBy === "duration") return b.duration - a.duration;
+      if (sortBy === "calories") return b.caloriesBurned - a.caloriesBurned;
+      if (sortBy === "rating") return b.rating - a.rating;
       return 0;
     });
   };
 
-  // added: removes an item from "Today's Plan" by id
   const handleRemoveFromAdd = (id: number) => {
     setAdd(add.filter((item) => item.id !== id));
   };
 
-  // added: removes an item from "Saved" by id
   const handleRemoveFromSave = (id: number) => {
     setSave(save.filter((item) => item.id !== id));
   };
 
-  // added: marking a workout as done simply removes it from today's plan
   const handleMarkDone = (id: number) => {
     setAdd(add.filter((item) => item.id !== id));
   };
@@ -55,18 +59,24 @@ const PlanTabs = ({ add, save, setAdd, setSave, activeTab, setActiveTab }: IPlan
     <div>
       <div className="flex items-center justify-between mb-6">
         <div role="tablist" className="tabs tabs-box bg-[#151921] rounded-xl">
-          <a role="tab"
-            onClick={() => setActiveTab('today')}
+          <a
+            role="tab"
+            onClick={() => setActiveTab("today")}
             className={`tab rounded-xl text-[12px] font-inter cursor-pointer ${
-              activeTab === 'today' ? 'tab-active bg-[#2b303d] text-white font-bold' : 'text-[#8A92A0]'
+              activeTab === "today"
+                ? "tab-active bg-[#2b303d] text-white font-bold"
+                : "text-[#8A92A0]"
             }`}
           >
             Today&apos;s Plan
           </a>
-          <a role="tab"
-            onClick={() => setActiveTab('saved')}
+          <a
+            role="tab"
+            onClick={() => setActiveTab("saved")}
             className={`tab rounded-xl text-[12px] font-inter cursor-pointer ${
-              activeTab === 'saved' ? 'tab-active bg-[#2b303d] text-white font-bold' : 'text-[#8A92A0]'
+              activeTab === "saved"
+                ? "tab-active bg-[#2b303d] text-white font-bold"
+                : "text-[#8A92A0]"
             }`}
           >
             Saved
@@ -74,7 +84,9 @@ const PlanTabs = ({ add, save, setAdd, setSave, activeTab, setActiveTab }: IPlan
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-[#8A92A0] text-[12px] font-inter font-normal whitespace-nowrap shrink-0">Sort By</span>
+          <span className="text-[#8A92A0] text-[12px] font-inter font-normal whitespace-nowrap shrink-0">
+            Sort By
+          </span>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as SortType)}
@@ -89,17 +101,14 @@ const PlanTabs = ({ add, save, setAdd, setSave, activeTab, setActiveTab }: IPlan
         </div>
       </div>
 
-      {activeTab === 'today' ? (
+      {activeTab === "today" ? (
         <TodaysPlanContent
           data={sortData(add)}
-          onRemove={handleRemoveFromAdd} // added
-          onMarkDone={handleMarkDone} // added
+          onRemove={handleRemoveFromAdd}
+          onMarkDone={handleMarkDone}
         />
       ) : (
-        <SavedContent
-          data={sortData(save)}
-          onRemove={handleRemoveFromSave} // added
-        />
+        <SavedContent data={sortData(save)} onRemove={handleRemoveFromSave} />
       )}
     </div>
   );
