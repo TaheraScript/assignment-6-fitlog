@@ -8,10 +8,11 @@ import Link from 'next/link';
 
 const AddButton = ({data} :{data:IWorkout}) => {
     const WorkoutsProvider = useContext(WorkoutsContext)
-    const {add,setAdd} = WorkoutsProvider
+    const {add,setAdd,setActiveTab} = WorkoutsProvider
 
     const handleWorkouts =() =>{
         setAdd([...add,data])
+        setActiveTab('today')
         toast.success(`You have added "${data.name}"`, {
 position: "top-center",
 autoClose: 5000,
@@ -25,7 +26,7 @@ transition: Bounce,
 });
     }
     return (
-        <Link href="/my-plan? tab=today"
+        <Link href="/my-plan"
         onClick={()=>handleWorkouts()} 
          className="flex-1 bg-[#ccff00] text-[#0F1115] font-semibold p-2 rounded-lg hover:bg-lime-300 transition font-inter text-[14px] flex justify-center items-center gap-2">
                 <LuCalendarPlus2 />Add to today&apos;s plan

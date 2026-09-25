@@ -8,10 +8,11 @@ import Link from 'next/link';
 
 const SaveButton = ({data} :{data:IWorkout}) => {
     const WorkoutsProvider = useContext(WorkoutsContext)
-    const {save,setSave} = WorkoutsProvider
+    const {save,setSave,setActiveTab} = WorkoutsProvider
 
     const handleWorkouts =() =>{
         setSave([...save,data])
+        setActiveTab('saved')
         toast.success(`You have saved "${data.name}"`, {
 position: "top-center",
 autoClose: 5000,
@@ -25,7 +26,7 @@ transition: Bounce,
 });
     }
     return (
-       <Link href="/my-plan ? tab=saved"
+       <Link href="/my-plan"
        onClick={() =>handleWorkouts()}
         className="flex-1 border border-[#374151] text-[#E5E7EB]  font-medium text-[14px] font-inter p-2 rounded-lg hover:bg-gray-800 transition flex justify-center items-center gap-2" >
                <FaRegBookmark /> Save for later

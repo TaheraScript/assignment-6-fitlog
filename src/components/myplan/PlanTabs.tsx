@@ -10,12 +10,13 @@ type SortType = 'duration' | 'calories' | 'rating' | 'name';
 interface IPlanTabsProps {
   add: IWorkout[];
   save: IWorkout[];
-   activeTab: TabType; 
-   setActiveTab: (tab: TabType) => void;
+  setAdd: (data: IWorkout[]) => void; // added: needed to remove/mark-done items
+  setSave: (data: IWorkout[]) => void; // added: needed to remove saved items
+  activeTab: TabType;
+  setActiveTab: (tab: TabType) => void;
 }
 
-const PlanTabs = ({ add, save, activeTab, setActiveTab  }: IPlanTabsProps) => {
-  
+const PlanTabs = ({ add, save, setAdd, setSave, activeTab, setActiveTab }: IPlanTabsProps) => {
   const [sortBy, setSortBy] = useState<SortType>('duration');
 
   const sortOptions: { key: SortType; label: string }[] = [
@@ -25,7 +26,6 @@ const PlanTabs = ({ add, save, activeTab, setActiveTab  }: IPlanTabsProps) => {
     { key: 'name', label: 'Name' },
   ];
 
-  // sort whichever array is currently active, based on sortBy
   const sortData = (data: IWorkout[]) => {
     return [...data].sort((a, b) => {
       if (sortBy === 'name') return a.name.localeCompare(b.name);
@@ -36,13 +36,26 @@ const PlanTabs = ({ add, save, activeTab, setActiveTab  }: IPlanTabsProps) => {
     });
   };
 
+  // added: removes an item from "Today's Plan" by id
+  const handleRemoveFromAdd = (id: number) => {
+    setAdd(add.filter((item) => item.id !== id));
+  };
+
+  // added: removes an item from "Saved" by id
+  const handleRemoveFromSave = (id: number) => {
+    setSave(save.filter((item) => item.id !== id));
+  };
+
+  // added: marking a workout as done simply removes it from today's plan
+  const handleMarkDone = (id: number) => {
+    setAdd(add.filter((item) => item.id !== id));
+  };
+
   return (
     <div>
-      {/* Tabs (left) + Sort By (right) */}
       <div className="flex items-center justify-between mb-6">
         <div role="tablist" className="tabs tabs-box bg-[#151921] rounded-xl">
-          
-           <a role="tab"
+          <a role="tab"
             onClick={() => setActiveTab('today')}
             className={`tab rounded-xl text-[12px] font-inter cursor-pointer ${
               activeTab === 'today' ? 'tab-active bg-[#2b303d] text-white font-bold' : 'text-[#8A92A0]'
@@ -50,8 +63,7 @@ const PlanTabs = ({ add, save, activeTab, setActiveTab  }: IPlanTabsProps) => {
           >
             Today&apos;s Plan
           </a>
-          
-          <a  role="tab"
+          <a role="tab"
             onClick={() => setActiveTab('saved')}
             className={`tab rounded-xl text-[12px] font-inter cursor-pointer ${
               activeTab === 'saved' ? 'tab-active bg-[#2b303d] text-white font-bold' : 'text-[#8A92A0]'
@@ -77,11 +89,17 @@ const PlanTabs = ({ add, save, activeTab, setActiveTab  }: IPlanTabsProps) => {
         </div>
       </div>
 
-      {/* Swap content based on active tab */}
       {activeTab === 'today' ? (
-        <TodaysPlanContent data={sortData(add)} />
+        <TodaysPlanContent
+          data={sortData(add)}
+          onRemove={handleRemoveFromAdd} // added
+          onMarkDone={handleMarkDone} // added
+        />
       ) : (
-        <SavedContent data={sortData(save)} />
+        <SavedContent
+          data={sortData(save)}
+          onRemove={handleRemoveFromSave} // added
+        />
       )}
     </div>
   );
