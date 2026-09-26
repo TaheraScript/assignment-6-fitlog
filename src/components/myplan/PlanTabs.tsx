@@ -3,11 +3,11 @@ import { useState } from "react";
 import { IWorkout } from "@/components/type/Workouts-type";
 import TodaysPlanContent from "./TodaysPlanContent";
 import SavedContent from "./SavedContent";
-import { Bounce, toast } from "react-toastify"; 
-import { IoChevronDown } from "react-icons/io5"; 
+import { Bounce, toast } from "react-toastify";
+import { IoChevronDown, IoSearch } from "react-icons/io5";
 
 type TabType = "today" | "saved";
-type SortType = "duration" | "calories" | "rating"; 
+type SortType = "duration" | "calories" | "rating";
 
 interface IPlanTabsProps {
   add: IWorkout[];
@@ -27,13 +27,25 @@ const PlanTabs = ({
   setActiveTab,
 }: IPlanTabsProps) => {
   const [sortBy, setSortBy] = useState<SortType>("duration");
+  const [query, setQuery] = useState("");
 
   const sortOptions: { key: SortType; label: string }[] = [
     { key: "duration", label: "Duration" },
     { key: "calories", label: "Calories" },
     { key: "rating", label: "Rating" },
-    
   ];
+
+  const filterData = (data: IWorkout[]) => {
+    const q = query.trim().toLowerCase();
+    if (!q) return data;
+    return data.filter((item) => {
+      const nameMatch = item.name.toLowerCase().includes(q);
+      const tagMatch = item.muscleGroups.some((tag) =>
+        tag.toLowerCase().includes(q),
+      );
+      return nameMatch || tagMatch;
+    });
+  };
 
   const sortData = (data: IWorkout[]) => {
     return [...data].sort((a, b) => {
@@ -42,10 +54,7 @@ const PlanTabs = ({
       if (sortBy === "rating") return b.rating - a.rating;
       return 0;
     });
-   
   };
-
-  
 
   const handleRemoveFromAdd = (id: number) => {
     const item = add.find((i) => i.id === id);
@@ -60,7 +69,7 @@ const PlanTabs = ({
         draggable: true,
         theme: "dark",
         transition: Bounce,
-      }); 
+      });
     }
   };
 
@@ -94,16 +103,27 @@ const PlanTabs = ({
         draggable: true,
         theme: "dark",
         transition: Bounce,
-      }); 
+      });
     }
   };
 
   return (
     <div>
+      <div className="relative mb-4 max-w-sm">
+        <IoSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8A92A0] text-[16px]" />
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search by name or tag…"
+          className="w-full bg-[#15171d] text-white text-[14px] font-inter border border-[#232732] rounded-xl pl-9 pr-3 py-1.5 focus:outline-none"
+        />
+      </div>
+
       <div className="flex items-center justify-between mb-6">
         <div role="tablist" className="tabs tabs-box bg-[#151921] rounded-xl ">
-          
-           <a role="tab"
+          <a
+            role="tab"
             onClick={() => setActiveTab("today")}
             className={`tab rounded-xl px-5 py-3 text-[12px] font-inter cursor-pointer ${
               activeTab === "today"
@@ -130,7 +150,7 @@ const PlanTabs = ({
           <span className="text-[#8A92A0] text-[12px] font-inter font-normal whitespace-nowrap shrink-0">
             Sort By
           </span>
-          
+
           <div className="relative">
             <select
               value={sortBy}
@@ -150,12 +170,15 @@ const PlanTabs = ({
 
       {activeTab === "today" ? (
         <TodaysPlanContent
-          data={sortData(add)}
+          data={sortData(filterData(add))}
           onRemove={handleRemoveFromAdd}
           onMarkDone={handleMarkDone}
         />
       ) : (
-        <SavedContent data={sortData(save)} onRemove={handleRemoveFromSave} />
+        <SavedContent
+          data={sortData(filterData(save))}
+          onRemove={handleRemoveFromSave}
+        />
       )}
     </div>
   );

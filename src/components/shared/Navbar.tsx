@@ -41,11 +41,11 @@ const Navbar = () => {
               <li>
                 <Link
                   className={`rounded-full px-5 py-2 transition-all duration-200 ${
-                    pathname === "/workouts"
+                    pathname === "/"
                       ? "bg-[#1a2a0f] text-[#ccff00]"
                       : "text-[#8A92A0] hover:bg-[#1a2a0f] hover:text-[#ccff00]"
                   }`}
-                  href="/workouts"
+                  href="/"
                 >
                   Workouts
                 </Link>
@@ -85,11 +85,11 @@ const Navbar = () => {
             <li>
               <Link
                 className={`rounded-full px-5 py-2 transition-all duration-200 ${
-                  pathname === "/workouts"
+                  pathname === "/" // CHANGED: was "/workouts"
                     ? "bg-[#1a2a0f] text-[#ccff00]"
                     : "text-[#8A92A0] hover:bg-[#1a2a0f] hover:text-[#ccff00]"
                 }`}
-                href="/workouts"
+                href="/"
               >
                 Workouts
               </Link>

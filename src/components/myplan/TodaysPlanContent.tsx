@@ -27,7 +27,7 @@ const TodaysPlanContent = ({
           Browse the library and add a lift to get today moving.
         </p>
         <Link
-          href="/workouts"
+          href="/"
           className="btn mt-6 bg-[#ccff00] text-[#0F1115] font-bold text-[14px] font-inter border-none rounded-full hover:bg-lime-300"
         >
           Go to workouts
@@ -86,7 +86,8 @@ const TodaysPlanContent = ({
               onClick={() => onMarkDone?.(item.id)}
               className="btn btn-sm bg-[#ccff00] text-[#0F1115] font-bold font-inter text-[12px] rounded-4xl p-4 border-none hover:bg-lime-300"
             >
-              <FaCheck className="text-[12px]" />&nbsp;&nbsp;Mark as Done
+              <FaCheck className="text-[12px]" />
+              &nbsp;&nbsp;Mark as Done
             </button>
             <button
               onClick={() => onRemove?.(item.id)}

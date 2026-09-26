@@ -5,9 +5,9 @@
 
 3)  Those technologies are  used in my project : 
 
-Next.js (App Router)
-TypeScript
-Tailwind CSS
+ Next.js (App Router)
+ TypeScript
+ Tailwind CSS
  DaisyUI
  React Toastify
  React Icons

@@ -21,7 +21,7 @@ const SavedContent = ({ data, onRemove }: ISavedContentProps) => {
           Browse the library and add a lift to get today moving.
         </p>
         <Link
-          href="/workouts"
+          href="/"
           className="btn mt-6 bg-[#ccff00] text-[#0F1115] font-bold text-[14px] font-inter border-none rounded-full hover:bg-lime-300"
         >
           Go to workouts

@@ -5,8 +5,20 @@ import WorkoutsStats from "@/components/myplan/WorkoutsStats";
 import PlanTabs from "@/components/myplan/PlanTabs";
 
 const MyPlan = () => {
-  const { add, save, setAdd, setSave, activeTab, setActiveTab } =
+  const { add, save, setAdd, setSave, activeTab, setActiveTab, isLoaded } =
     useContext(WorkoutsContext);
+
+  if (!isLoaded) {
+    return (
+      <div className="container mx-auto py-24 flex flex-col items-center justify-center gap-4 min-h-[40vh]">
+        <span className="loading loading-spinner loading-lg text-[#ccff00]" />
+        <p className="text-[#8A92A0] text-[14px] font-inter">
+          Loading workouts…
+        </p>
+      </div>
+    );
+  }
+
   const activeData = activeTab === "today" ? add : save;
   const totalMinutes = activeData.reduce((sum, item) => sum + item.duration, 0);
   const totalCalories = activeData.reduce(

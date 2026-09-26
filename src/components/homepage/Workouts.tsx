@@ -1,5 +1,5 @@
-import WorkoutsCard from "../card/WorkoutsCard";
-import { IWorkout } from "../type/Workouts-type";
+import { IWorkout } from "@/components/type/Workouts-type";
+import LibrarySearch from "./LibrarySearch";
 
 const getWorkouts = async (): Promise<IWorkout[]> => {
   try {
@@ -24,22 +24,15 @@ const Workouts = async () => {
   const workoutsData = await getWorkouts();
 
   return (
-    <div className="container mx-auto">
+    <div id="library" className="container mx-auto scroll-mt-24">
       <div className="pb-8">
         <h2 className="font-oswald font-bold text-[30px]">THE LIBRARY</h2>
         <p className="font-normal text-[14px]">
           Twelve lifts covering every major muscle group.
         </p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 container mx-auto">
-        {workoutsData.length > 0 ? (
-          workoutsData.map((data: IWorkout) => (
-            <WorkoutsCard key={data.id} data={data} />
-          ))
-        ) : (
-          <p>Couldn&apos;t load workouts right now. Please try again later.</p>
-        )}
-      </div>
+
+      <LibrarySearch workoutsData={workoutsData} />
     </div>
   );
 };
