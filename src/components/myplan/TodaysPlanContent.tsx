@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { IWorkout } from "@/components/type/Workouts-type";
-import { FaRegClock } from "react-icons/fa";
+import { FaCheck, FaRegClock } from "react-icons/fa";
 import { PiFireSimpleFill } from "react-icons/pi";
 import { MdOutlineStarBorderPurple500 } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
@@ -86,7 +86,7 @@ const TodaysPlanContent = ({
               onClick={() => onMarkDone?.(item.id)}
               className="btn btn-sm bg-[#ccff00] text-[#0F1115] font-bold font-inter text-[12px] rounded-4xl p-4 border-none hover:bg-lime-300"
             >
-              ✓&nbsp;&nbsp;Mark as Done
+              <FaCheck className="text-[12px]" />&nbsp;&nbsp;Mark as Done
             </button>
             <button
               onClick={() => onRemove?.(item.id)}

@@ -31,7 +31,7 @@ const Workouts = async () => {
           Twelve lifts covering every major muscle group.
         </p>
       </div>
-      <div className="grid grid-cols-3 grid-rows-4 gap-4 container mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 container mx-auto">
         {workoutsData.length > 0 ? (
           workoutsData.map((data: IWorkout) => (
             <WorkoutsCard key={data.id} data={data} />

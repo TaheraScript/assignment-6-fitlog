@@ -2,7 +2,7 @@ import { IWorkout } from "@/components/type/Workouts-type";
 import Image from "next/image";
 import AddButton from "@/components/workoutsdetails/AddButton";
 import SaveButton from "@/components/workoutsdetails/SaveButton";
-
+import { notFound } from "next/navigation";
 interface IWorkoutsDetailPage {
   params: Promise<{
     workoutsId: string;
@@ -33,7 +33,7 @@ const workoutsDetailPage = async ({ params }: IWorkoutsDetailPage) => {
     (data: IWorkout) => Number(data.id) === Number(workoutsId),
   );
   if (!data) {
-    return <div>Workout not found.</div>;
+    notFound(); 
   }
   const specs = [
     { label: "EQUIPMENT", value: data.equipment },

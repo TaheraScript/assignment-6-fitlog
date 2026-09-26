@@ -9,7 +9,7 @@ import { WorkoutsContext } from "@/context/WorkoutsProvider";
 const Navbar = () => {
   const pathname = usePathname();
 
-  const { add, save, activeTab } = useContext(WorkoutsContext);
+  const { add, save } = useContext(WorkoutsContext);
 
   return (
     <div className="bg-[#15171d] shadow-sm">
@@ -45,7 +45,7 @@ const Navbar = () => {
                       ? "bg-[#1a2a0f] text-[#ccff00]"
                       : "text-[#8A92A0] hover:bg-[#1a2a0f] hover:text-[#ccff00]"
                   }`}
-                  href="/workouts "
+                  href="/workouts"
                 >
                   Workouts
                 </Link>
@@ -112,35 +112,21 @@ const Navbar = () => {
 
         <div className="navbar-end">
           <div className="flex items-center gap-7">
-            <div className="flex items-center gap-2">
+            <Link href="/my-plan" className="flex items-center gap-2">
               <span className="text-white text-[14px] font-inter">Plan</span>
-
-              <span
-                className={`flex items-center justify-center w-6 h-6 rounded-full text-[12px] font-bold ${
-                  activeTab === "today"
-                    ? "bg-[#ccff00] text-[#0F1115]"
-                    : "border border-[#374151] text-[#8A92A0]"
-                }`}
-              >
+              <span className="flex items-center justify-center w-6 h-6 rounded-full text-[12px] font-bold bg-[#ccff00] text-[#0F1115]">
                 {add.length}
               </span>
-            </div>
+            </Link>
 
-            <div className="flex items-center gap-2">
+            <Link href="/my-plan" className="flex items-center gap-2">
               <span className="text-[#8A92A0] text-[14px] font-inter">
                 Saved
               </span>
-
-              <span
-                className={`flex items-center justify-center w-6 h-6 rounded-full text-[12px] font-bold ${
-                  activeTab === "saved"
-                    ? "bg-[#ccff00] text-[#0F1115]"
-                    : "border border-[#374151] text-[#8A92A0]"
-                }`}
-              >
+              <span className="flex items-center justify-center w-6 h-6 rounded-full text-[12px] font-bold border border-[#374151] text-[#8A92A0]">
                 {save.length}
               </span>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

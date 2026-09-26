@@ -8,6 +8,8 @@ import { useContext } from "react";
 import { Bounce, toast } from "react-toastify";
 import Link from "next/link";
 
+const limit = 5;
+
 const AddButton = ({ data }: { data: IWorkout }) => {
   const WorkoutsProvider = useContext(WorkoutsContext);
 
@@ -37,6 +39,23 @@ const AddButton = ({ data }: { data: IWorkout }) => {
       return;
     }
 
+    if (add.length >= limit) {
+      e.preventDefault();
+
+      toast.warning("Today's plan is full — mark a lift done to add another.", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition: Bounce,
+      });
+
+      return;
+    }
+
     setAdd([...add, data]);
 
     setActiveTab("today");
@@ -54,19 +73,26 @@ const AddButton = ({ data }: { data: IWorkout }) => {
     });
   };
 
+  const isFull =
+    add.length >= limit && !add.some((item) => item.id === data.id);
+
   return (
     <Link
       href="/my-plan"
       onClick={handleWorkouts}
-      aria-disabled={isDuplicate}
+      aria-disabled={isDuplicate || isFull}
       className={`flex-1 bg-[#ccff00] text-[#0F1115] font-semibold p-2 rounded-lg transition font-inter text-[14px] flex justify-center items-center gap-2 ${
-        isDuplicate
+        isDuplicate || isFull
           ? "opacity-50 cursor-not-allowed pointer-events-none"
           : "hover:bg-lime-300"
       }`}
     >
       <LuCalendarPlus2 />
-      {isDuplicate ? "Already Added" : "Add to today's plan"}
+      {isDuplicate
+        ? "Already Added"
+        : isFull
+          ? "Plan Full"
+          : "Add to today's plan"}
     </Link>
   );
 };
