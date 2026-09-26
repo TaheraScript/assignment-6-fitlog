@@ -41,7 +41,6 @@ const TodaysPlanContent = ({
       {data.map((item) => (
         <div
           key={item.id}
-          
           className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-[#151921] rounded-xl p-3"
         >
           <div className="flex items-center gap-4">
@@ -76,7 +75,6 @@ const TodaysPlanContent = ({
             </div>
           </div>
 
-         
           <div className="flex items-center gap-3 flex-wrap sm:justify-end">
             <Link
               href={`/workouts/${item.id}`}
@@ -88,7 +86,8 @@ const TodaysPlanContent = ({
               onClick={() => onMarkDone?.(item.id)}
               className="btn btn-sm bg-[#ccff00] text-[#0F1115] font-bold font-inter text-[12px] rounded-4xl p-4 border-none hover:bg-lime-300"
             >
-              <FaCheck className="text-[12px]" />&nbsp;&nbsp;Mark as Done
+              <FaCheck className="text-[12px]" />
+              &nbsp;&nbsp;Mark as Done
             </button>
             <button
               onClick={() => onRemove?.(item.id)}
