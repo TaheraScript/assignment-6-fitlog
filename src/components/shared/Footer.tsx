@@ -5,8 +5,8 @@ const Footer = () => {
     <div className="p-4">
       <div className="divider pt-7" />
       <div className="p-4 pb-4">
-        <div className="flex justify-between container mx-auto ">
-          <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-3 container mx-auto text-center sm:text-left">
+          <div className="flex gap-3 items-center">
             <IoBarbell className="text-[#ccff00] text-[20px]" />
             <h2 className="font-oswald text-[14px] font-bold text-white">
               FITLOG
