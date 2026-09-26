@@ -58,11 +58,11 @@ const PlanTabs = ({
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <div role="tablist" className="tabs tabs-box bg-[#151921] rounded-xl">
-          <a
+        <div role="tablist" className="tabs tabs-box bg-[#151921] rounded-xl ">
+          <a 
             role="tab"
             onClick={() => setActiveTab("today")}
-            className={`tab rounded-xl text-[12px] font-inter cursor-pointer ${
+            className={`tab rounded-xl px-5 py-3 text-[12px] font-inter cursor-pointer ${
               activeTab === "today"
                 ? "tab-active bg-[#2b303d] text-white font-bold"
                 : "text-[#8A92A0]"
@@ -73,7 +73,7 @@ const PlanTabs = ({
           <a
             role="tab"
             onClick={() => setActiveTab("saved")}
-            className={`tab rounded-xl text-[12px] font-inter cursor-pointer ${
+            className={`tab rounded-xl px-5 py-3 text-[12px] font-inter cursor-pointer ${
               activeTab === "saved"
                 ? "tab-active bg-[#2b303d] text-white font-bold"
                 : "text-[#8A92A0]"
